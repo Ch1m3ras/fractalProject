@@ -11,9 +11,12 @@ def pythagorusFractalTree(size, turtleType, iterations,):
     else:
         for x in range(0 , 4):
             turtleType.forward(size)
-            turtleType.left(30)
-            pythagorusFractalTree(size * ((2 ** 1/2) / 2), turtleType, (iterations - 1))
-            turtleType.left(30)
+            previousHeading = turtleType.heading()
+            turtleType.right(45)
+            if x <= 1:
+                pythagorusFractalTree(size * ((2 ** 1/2) / 2), turtleType, (iterations - 1))
+            turtleType.setheading(previousHeading)
+            turtleType.right(90)
 
 
 
