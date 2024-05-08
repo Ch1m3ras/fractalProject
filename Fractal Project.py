@@ -1,26 +1,33 @@
 import turtle
 import math
 drawTurtle = turtle.Turtle()
+drawTurtle.setheading(90)
 
-def pythagorusFractalTree(size, turtleType, iterations,):
-    turtleType.setheading(90)
+def pythagorusFractalTree(size, turtleType, iterations, firstSquare):
     if iterations == 0:
         for x in range(0, 4):
-            turtleType.forward(size)
-            turtleType.right(90)
+            if firstSquare == True:
+                turtleType.forward(size)
+                turtleType.right(90)
+            if firstSquare == False:
+                turtleType.forward(size)
+                turtleType.left(90)
     else:
         for x in range(0 , 4):
             turtleType.forward(size)
             previousHeading = turtleType.heading()
-            turtleType.right(45)
             if x <= 1:
-                pythagorusFractalTree(size * ((2 ** 1/2) / 2), turtleType, (iterations - 1))
-            turtleType.setheading(previousHeading)
+                turtleType.left(45)
+                if x == 0:
+                    pythagorusFractalTree(math.sqrt(2) * (size * 1/2), turtleType, (iterations - 1), True)
+                if x == 1:
+                    pythagorusFractalTree(math.sqrt(2) * (size * 1/2), turtleType, (iterations - 1), False)
+                turtleType.setheading(previousHeading)
             turtleType.right(90)
 
 
 
-pythagorusFractalTree(100, drawTurtle, 1)
+pythagorusFractalTree(100, drawTurtle, 3, False)
 
 #More code do disregard to make sure VS doesn't instantaneously explode upon running it.
 input()
